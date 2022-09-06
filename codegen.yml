@@ -1,0 +1,12 @@
+generates:
+  src/types.generated.ts:
+    schema: node_modules/tree-db-schema/schema/schema.gql
+    documents: node_modules/tree-db-schema/documents/trees.gql
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+
+    config:
+      mappers:
+        Genus: ./data/genus#StoredGenus

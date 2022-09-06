@@ -1,19 +1,31 @@
 import React from "react";
 import "./App.css";
-import { useGenera } from "./hooks.ts/useGenera";
+import { useGetGeneraQuery } from "./types.generated";
 
 function App() {
-  const genera = useGenera();
+  const { data } = useGetGeneraQuery();
   return (
-    <ul>
-      {(genera as any)?.map((genus: any) => {
-        return (
-          <li>
-            {genus.name} ({genus.commonNames.join(",")})
-          </li>
-        );
-      })}
-    </ul>
+    <div>
+      Genera:
+      <ul>
+        {data?.genera.map((genus) => {
+          return (
+            <li>
+              {genus.name} ({genus.commonNames.join(",")}) Species:
+              <ul>
+                {genus.species.map((species) => {
+                  return (
+                    <li>
+                      {species.name} ({species.commonNames.join(",")})
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
